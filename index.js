@@ -78,7 +78,7 @@ var boundaryConditions = function(seq, k, sums) {
   return conds
 }
 
-var getValue(elem) {
+var getValue = function(elem) {
   var value = 0;
   if (elem instanceof File) {
     value = elem.size;
