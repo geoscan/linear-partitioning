@@ -59,7 +59,8 @@ var reconstructPartition = function(seq, dividers, k) {
 var prefixSums = function(seq) {
   var sums = [0]
   for(var i = 1; i <= seq.length; ++i) {
-    sums[i] = sums[i - 1] + seq[i - 1]
+    var value = getValue(seq[i-1]);
+    sums[i] = sums[i - 1] + value;
   }
   return sums
 }
@@ -72,8 +73,18 @@ var boundaryConditions = function(seq, k, sums) {
     conds[i] = []
     conds[i][1] = sums[i]
   }
-  for(var j = 1; j <= k; ++j) conds[1][j] = seq[0]
+  var value = getValue(seq[0]);
+  for(var j = 1; j <= k; ++j) conds[1][j] = value
   return conds
 }
 
+var getValue(elem) {
+  var value = 0;
+  if (elem instanceof File) {
+    value = elem.size;
+  } else {
+    value = elem;
+  }
+  return value;
+}
 module.exports = partition
